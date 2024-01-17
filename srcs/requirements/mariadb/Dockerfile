@@ -12,7 +12,7 @@ RUN chmod 755 script.sh
 
 ENTRYPOINT ["bash", "/script.sh"]
 
-EXPOSE 3306
+#EXPOSE 3306
 
 #CMD /usr/bin/mysqld_safe
 

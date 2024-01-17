@@ -22,4 +22,6 @@ COPY ./tools/wp-config_script.sh /
 
 RUN chmod 755 wp-config_script.sh
 
-CMD ["./wp-config_script.sh"]
+ENTRYPOINT ["./wp-config_script.sh"]
+
+CMD [ "/usr/sbin/php-fpm7.3", "-F" ]

@@ -26,7 +26,7 @@ wp user create  --allow-root \
                 --path='/var/www/wordpress' >> /log.txt
 fi
 
-if [ ! -d mkdir /run/php ]; then
+if [ ! -d /run/php ]; then
     mkdir ./run/php
 fi
 /usr/sbin/php-fpm7.3 -F
