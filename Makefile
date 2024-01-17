@@ -6,7 +6,7 @@
 #    By: babieseater <babieseater@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/22 15:54:05 by smayrand          #+#    #+#              #
-#    Updated: 2024/01/15 17:10:01 by babieseater      ###   ########.fr        #
+#    Updated: 2024/01/17 13:29:43 by babieseater      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,11 @@ build:
         sudo mkdir -p $(MARIADB_DIR); \
         echo "Directory $(MARIADB_DIR) created."; \
     fi
-	docker compose -f ./srcs/docker-compose.yml up -d --build
+	docker compose -f ./srcs/docker-compose.yml up -d --build && sudo chown -R ${USER}:${USER} $(DATA_DIR)
 
 
 up:
-	docker-compose -f ./srcs/docker-compose.yml up -d
+	docker compose -f ./srcs/docker-compose.yml up -d
 
 dw:
 	docker compose -f ./srcs/docker-compose.yml down
@@ -41,8 +41,9 @@ prune: dw
 	sudo rm -rf $(WORDPRESS_DIR)
 	sudo rm -rf $(MARIADB_DIR)
 	docker-compose -f ./srcs/docker-compose.yml down --remove-orphans --volumes
-	# docker image prune -a -f
+	docker image prune -a -f
 	docker system prune -f
+	docker container prune -f
 
 clean:
 	docker stop $$(docker ps -qa);\
